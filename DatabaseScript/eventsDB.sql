@@ -19,8 +19,8 @@ create table if not exists Category (
 
 create table if not exists Happening (
 	happening_id mediumint not null auto_increment, 
-	starttime datetime,
-	endtime datetime,
+	starttime BIGINT,
+	endtime BIGINT,
 	category_id mediumint,
 	constraint happening_category foreign key (category_id) references Category(category_id) on delete cascade on update cascade,
 	primary key (happening_id)
