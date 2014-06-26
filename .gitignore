@@ -2,6 +2,7 @@
 .project
 .settings/
 bin/
+build/
 
 database.properties
 .DS_Store
