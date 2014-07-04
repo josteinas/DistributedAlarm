@@ -16,7 +16,7 @@ create table if not exists Friends (
 ) engine=InnoDB default charset=utf8;
 
 create table if not exists Category (
-	category_id mediumint not null auto_increment,
+	category_id int unsigned not null auto_increment,
 	name varchar(30) not null,
 	lat float not null, 
 	lon float not null,
@@ -27,18 +27,20 @@ create table if not exists Category (
 ) engine=InnoDB default charset=utf8;
 
 create table if not exists Happening (
-	happening_id mediumint not null auto_increment, 
+	happening_id int unsigned not null auto_increment, 
 	starttime BIGINT,
 	endtime BIGINT,
-	category_id mediumint,
+	category_id int unsigned,
 	private boolean,
+	creator varchar(30),
+	constraint happening_creator foreign key (creator) references User(Username) on delete cascade on update cascade,
 	constraint happening_category foreign key (category_id) references Category(category_id) on delete cascade on update cascade,
 	primary key (happening_id)
 ) engine= InnoDB default charset = utf8;
 
 create table if not exists Follows (
 	username varchar(30),
-	category_id mediumint not null,
+	category_id int unsigned not null,
 	constraint user_fk foreign key (category_id) references Category(category_id) on delete cascade on update cascade,
 	primary key (username, category_id)
 ) engine= InnoDB default charset = utf8;

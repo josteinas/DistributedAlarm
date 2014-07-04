@@ -1,15 +1,30 @@
 package database;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import server.Category;
+import server.Happening;
+import server.User;
 
 public interface EventsQueries {
 	
-	public boolean addUser(String username, String password, String picture);
-	public boolean removeUser(String username);
-	public boolean addCategory(String name, float latitude, float longitude, String creator);
-	public boolean removeCategory(String name);
-	public boolean addHappening(String category_name, Timestamp startdate, Timestamp enddate);
-	public boolean removeHappening(String category_name, Timestamp startdate, Timestamp enddate);
-	public int getCategoryId(String name, float latitude, float longitude, String creator);
+	public boolean addUser(User user);
+	public boolean removeUser(User user);
 	
+	public boolean addCategory(Category category);
+	public boolean removeCategory(Category category);
+	
+	public boolean addHappening(Happening happening);
+	public boolean removeHappening(Happening happening);
+	
+	public boolean addFriends(User first, User second);
+	public boolean removeFriends(User first, User second);
+	
+	public boolean updateUser(User user);
+	public boolean updateCategory(Category category);
+	public boolean updateHappening(Happening happening);
+	
+	public ArrayList<User> getUsers();
+	public ArrayList<Category> getCategories();
+	public ArrayList<Happening> getHappenings();
 }
