@@ -279,4 +279,66 @@ public class EventsQueriesImpl implements EventsQueries {
 		}
 		return happenings;
 	}
+
+	@Override
+	public boolean addFollowed(User user, Category category) {
+		try {
+			connector.customModification("insert into Follows (username, category_id) values ('"+user.getUsername()+"' , '"+category.getId()+"');");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean removeFollowed(User user, Category category) {
+		String username = user.getUsername();
+		long categoryId = category.getId();
+		try {
+			connector.customModification("delete from Follows where category_id = "+categoryId+" and username = " + username + " ;");
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public ArrayList<User> getFriends(User user) {
+		String username = user.getUsername();
+		ArrayList<User> friends = new ArrayList<User>();
+		try {
+			ResultSet rs = connector.customQuery("select * from Friends where (user1 = '"+username+"') or (user2 = '"+username+"');");
+			while (rs.next()) {
+				if(rs.getString("user1").equals(username)) {
+					friends.add(users.get(rs.getString("user2")));
+				} else {
+					friends.add(users.get(rs.getString("user1")));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return friends;
+	}
+
+	@Override
+	public ArrayList<Category> getFollowedCategories(User user) {
+		String username = user.getUsername();
+		ArrayList<Category> followed = new ArrayList<Category>();
+		try {
+			ResultSet rs = connector.customQuery("select category_id from Follows where (username = '"+username+"');");
+			while (rs.next()) {
+				followed.add(categories.get(rs.getLong("category_id")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return followed;
+	}
 }
