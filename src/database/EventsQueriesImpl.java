@@ -23,6 +23,11 @@ public class EventsQueriesImpl implements EventsQueries {
 	private HashMap<String, User> users = new HashMap<String,User>();
 	private HashMap<Long, Category> categories = new HashMap<Long,Category>();
 	
+	private static EventsQueries instance;
+	public static EventsQueries getInstance(){
+		return instance == null ?( instance = new EventsQueriesImpl() ): instance;
+	}
+	
 	
 	public EventsQueriesImpl() {
 		dbProperties = readProperties();
@@ -40,7 +45,8 @@ public class EventsQueriesImpl implements EventsQueries {
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream("database.properties");
+			System.out.println(this.getClass().getClassLoader().getResourceAsStream("database.properties"));
+			input = this.getClass().getClassLoader().getResourceAsStream("database.properties");
 			
 			properties.load(input);
 
