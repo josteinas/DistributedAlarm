@@ -347,4 +347,12 @@ public class EventsQueriesImpl implements EventsQueries {
 		}
 		return followed;
 	}
+
+
+	@Override
+	public User getUser(String username) {
+		//TODO query one specific user instead of all??
+		getUsers();
+		return users.get(username);
+	}
 }

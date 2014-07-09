@@ -32,4 +32,6 @@ public interface EventsQueries {
 	public ArrayList<Happening> getHappenings();
 	public ArrayList<User> getFriends(User user);
 	public ArrayList<Category> getFollowedCategories(User user);
+	
+	public User getUser(String username);
 }

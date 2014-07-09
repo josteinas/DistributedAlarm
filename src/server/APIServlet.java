@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import apimethods.CreateUser;
+import apimethods.ValidateUser;
 
 
 /**
@@ -48,7 +49,7 @@ public class APIServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		JSONObject result = CreateUser.getInstance().doMethod(request);
+		JSONObject result = ValidateUser.getInstance().doMethod(request);
 		response.getWriter().write(result.toString());
 	}
 

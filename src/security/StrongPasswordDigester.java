@@ -16,9 +16,8 @@ public class StrongPasswordDigester implements PasswordDigester {
 	}
 
 	@Override
-	public String checkPassword(String inputPassword, String digestedPassword) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean checkPassword(String inputPassword, String digestedPassword) {
+		return digester.checkPassword(inputPassword, digestedPassword);
 	}
 	
 	
