@@ -28,7 +28,7 @@ public class EventsDBConnector {
 			e.printStackTrace();
 		}
 		conn = DriverManager.getConnection(url, user, password);
-		System.out.println("Connection established");
+		System.out.println("Database connection established");
 	}
 
 	public ResultSet customQuery(String sql) throws SQLException {

@@ -28,7 +28,7 @@ public class ValidateUser extends ApiMethod {
 		
 		User user = EventsQueriesImpl.getInstance().getUser(userName);
 		
-		if(new StrongPasswordDigester().checkPassword(password, user.getPassword())){
+		if(user != null && new StrongPasswordDigester().checkPassword(password, user.getPassword())){
 			result.append(ApiConstants.Parameters.USERNAME, userName);
 			result.append(ApiConstants.Parameters.SUCCESS, true);
 		}else{
