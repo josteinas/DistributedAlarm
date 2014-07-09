@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 
 import database.EventsQueriesImpl;
+import security.StrongPasswordDigester;
 import server.User;
 
 
@@ -24,6 +25,8 @@ public class CreateUser extends ApiMethod{
 		String userName = request.getParameter(ApiConstants.Parameters.USERNAME);
 		String password = request.getParameter(ApiConstants.Parameters.PASSWORD);
 		String imgUrl = request.getParameter(ApiConstants.Parameters.IMAGE_URL);
+		
+		password = new StrongPasswordDigester().digestPassword(password);
 		
 		if(EventsQueriesImpl.getInstance().addUser(new User(userName, password, imgUrl))){
 			result.append(ApiConstants.Parameters.USERNAME, userName);
