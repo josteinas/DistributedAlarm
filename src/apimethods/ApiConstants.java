@@ -8,5 +8,6 @@ public class ApiConstants {
 		
 		public static final String RESULT = "result";
 		public static final String SUCCESS = "success";
+		public static final String EMAIL = "email";
 	}
 }

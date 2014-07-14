@@ -25,10 +25,11 @@ public class CreateUser extends ApiMethod{
 		String userName = request.getParameter(ApiConstants.Parameters.USERNAME);
 		String password = request.getParameter(ApiConstants.Parameters.PASSWORD);
 		String imgUrl = request.getParameter(ApiConstants.Parameters.IMAGE_URL);
+		String email = request.getParameter(ApiConstants.Parameters.EMAIL);
 		
 		password = new StrongPasswordDigester().digestPassword(password);
 		
-		if(EventsQueriesImpl.getInstance().addUser(new User(userName, password, imgUrl))){
+		if(EventsQueriesImpl.getInstance().addUser(new User(userName, password, imgUrl, email))){
 			result.append(ApiConstants.Parameters.USERNAME, userName);
 			result.append(ApiConstants.Parameters.SUCCESS, true);
 		}else{

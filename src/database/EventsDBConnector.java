@@ -41,5 +41,14 @@ public class EventsDBConnector {
 		System.out.println(sql);
 		return statement.execute(sql);
 	}
+	public Connection getConnection() {
+		try {
+			return (conn != null) ? conn : DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

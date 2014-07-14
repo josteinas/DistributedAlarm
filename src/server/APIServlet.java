@@ -49,7 +49,7 @@ public class APIServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		JSONObject result = ValidateUser.getInstance().doMethod(request);
+		JSONObject result = CreateUser.getInstance().doMethod(request);
 		response.getWriter().write(result.toString());
 	}
 

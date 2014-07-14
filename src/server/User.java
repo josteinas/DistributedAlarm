@@ -5,11 +5,13 @@ public class User {
 	private String username;
 	private String password;
 	private String imgURL;
+	private String email;
 	
-	public User(String username, String password, String imgURL) {
+	public User(String username, String password, String imgURL, String email) {
 		this.username = username;
 		this.password = password;
 		this.imgURL = imgURL;
+		this.email = email;
 	}
 
 	public String getUsername() {
@@ -34,6 +36,14 @@ public class User {
 
 	public void setImgURL(String imgURL) {
 		this.imgURL = imgURL;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override

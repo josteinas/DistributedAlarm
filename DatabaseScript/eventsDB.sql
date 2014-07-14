@@ -2,6 +2,7 @@
 create table if not exists User (
 	username varchar(30),
 	password varchar(64),
+	email varchar(254),
 	picture VARCHAR(2083),
 	primary key (username)
 ) engine = InnoDB default charset = utf8;
