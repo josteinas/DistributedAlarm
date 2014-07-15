@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 
+import apimethods.exceptions.APIException;
 import database.EventsQueriesImpl;
 import security.StrongPasswordDigester;
 import server.User;
@@ -19,7 +20,7 @@ public class CreateUser extends ApiMethod{
 	}
 	
 	@Override
-	public JSONObject doMethod(HttpServletRequest request) {
+	public JSONObject doMethod(HttpServletRequest request) throws APIException{
 		JSONObject result = new JSONObject();
 		
 		String userName = request.getParameter(ApiConstants.Parameters.USERNAME);
@@ -28,12 +29,12 @@ public class CreateUser extends ApiMethod{
 		String email = request.getParameter(ApiConstants.Parameters.EMAIL);
 		
 		password = new StrongPasswordDigester().digestPassword(password);
+		User user = new User(userName, password, imgUrl, email);
 		
-		if(EventsQueriesImpl.getInstance().addUser(new User(userName, password, imgUrl, email))){
+		if(EventsQueriesImpl.getInstance().addUser(user)){
 			result.append(ApiConstants.Parameters.USERNAME, userName);
-			result.append(ApiConstants.Parameters.SUCCESS, true);
 		}else{
-			result.append(ApiConstants.Parameters.SUCCESS, false);
+			throw new APIException("Unable to create user",  String.format("Unable to create user %s", user.toString()));
 		}
 		
 		return result;

@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 
+import apimethods.exceptions.APIException;
+
 public abstract class ApiMethod {
-	public abstract JSONObject doMethod(HttpServletRequest request);
+	public abstract JSONObject doMethod(HttpServletRequest request) throws APIException;
 	public abstract Set<String> getRequiredParameters();
-	
 	
 	public  Set<String> verifyParameters(HttpServletRequest request){
 		Set<String> resultSet = new HashSet<>();
@@ -21,6 +22,16 @@ public abstract class ApiMethod {
 				resultSet.add(key);
 		}
 		return resultSet;
+	}
+	
+	public static ApiMethod instanceFactory(String methodName){
+		if(methodName.equals(CreateUser.class.getSimpleName()))
+			return CreateUser.getInstance();
+		if(methodName.equals(RestorePassword.class.getSimpleName()))
+			return RestorePassword.getInstance();
+		if(methodName.equals(ValidateUser.class.getSimpleName()))
+			return ValidateUser.getInstance();
+		return null;
 	}
 	
 	

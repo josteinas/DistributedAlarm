@@ -21,6 +21,8 @@ public class ValidateUser extends ApiMethod {
 
 	@Override
 	public JSONObject doMethod(HttpServletRequest request) {
+		
+		
 		JSONObject result = new JSONObject();
 		
 		String userName = request.getParameter(ApiConstants.Parameters.USERNAME);
