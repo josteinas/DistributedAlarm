@@ -37,7 +37,7 @@ public class RestorePassword extends ApiMethod {
 		user.setPassword(passwordHash);
 		//TODO send this to the user. 
 		if(eq.updateUser(user)){
-			result.append(ApiConstants.Parameters.USERNAME, userName);
+			result.put(ApiConstants.Parameters.USERNAME, userName);
 		}else{
 			throw new APIException("Unable to update user: " + user);
 		}
