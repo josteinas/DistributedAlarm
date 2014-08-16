@@ -30,15 +30,6 @@ public class APIServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public APIServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * hei jostein
 	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -47,6 +38,7 @@ public class APIServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.sendRedirect("http://www.vg.no");
+		System.out.println("get received");
 	}
 
 	/**
@@ -57,19 +49,21 @@ public class APIServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		JSONObject result;
+		System.out.print("connected");
 		try {
 			String methodName = resolveMethodName(request.getRequestURL()
 					.toString());
 			ApiMethod method = ApiMethod.instanceFactory(methodName);
 			result = method.doMethod(request);
-			result.append(ApiConstants.Parameters.SUCCESS, true);
+			result.put(ApiConstants.Parameters.SUCCESS, true);
 		} catch (APIException e) {
 			result = new JSONObject();
-			result.append(ApiConstants.Parameters.SUCCESS, false);
+			result.put(ApiConstants.Parameters.SUCCESS, false);
 			System.out.println(e.getToUser());
 			e.printStackTrace();
 		}
 		response.getWriter().write(result.toString());
+		System.out.println(result);
 	}
 
 	private String resolveMethodName(String url) {

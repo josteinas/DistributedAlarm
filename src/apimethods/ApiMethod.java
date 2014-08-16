@@ -25,11 +25,11 @@ public abstract class ApiMethod {
 	}
 	
 	public static ApiMethod instanceFactory(String methodName){
-		if(methodName.equals(CreateUser.class.getSimpleName()))
+		if(methodName.equalsIgnoreCase(CreateUser.class.getSimpleName()))
 			return CreateUser.getInstance();
-		if(methodName.equals(RestorePassword.class.getSimpleName()))
+		if(methodName.equalsIgnoreCase(RestorePassword.class.getSimpleName()))
 			return RestorePassword.getInstance();
-		if(methodName.equals(ValidateUser.class.getSimpleName()))
+		if(methodName.equalsIgnoreCase(ValidateUser.class.getSimpleName()))
 			return ValidateUser.getInstance();
 		return null;
 	}

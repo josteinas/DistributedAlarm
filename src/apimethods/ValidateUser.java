@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 
 import apimethods.exceptions.APIException;
+import security.SessionManager;
 import security.StrongPasswordDigester;
 import server.User;
 import database.EventsQueriesImpl;
@@ -22,26 +23,27 @@ public class ValidateUser extends ApiMethod {
 
 	@Override
 	public JSONObject doMethod(HttpServletRequest request) throws APIException{
-		
-		
 		JSONObject result = new JSONObject();
 		
 		String userName = request.getParameter(ApiConstants.Parameters.USERNAME);
 		String password = request.getParameter(ApiConstants.Parameters.PASSWORD);
 		
 		User user = EventsQueriesImpl.getInstance().getUser(userName);
-		if(user == null){
-			throw new APIException("Invalid username");
-		}
+		result.put(ApiConstants.Parameters.USERNAME, userName);
 		
-		if(new StrongPasswordDigester().checkPassword(password, user.getPassword())){
-			result.put(ApiConstants.Parameters.USERNAME, userName);
-			result.put(ApiConstants.Parameters.VALIDATION_SUCCEEDED,true);
-			//TODO return session key and store it somewhere
-		}else{
-			result.put(ApiConstants.Parameters.USERNAME, userName);
+		if(user == null){
 			result.put(ApiConstants.Parameters.VALIDATION_SUCCEEDED,false);
 		}
+		else{
+			if(new StrongPasswordDigester().checkPassword(password, user.getPassword())){
+				result.put(ApiConstants.Parameters.VALIDATION_SUCCEEDED,true);
+				
+				SessionManager.getSession(request, userName);
+			}else{
+				result.put(ApiConstants.Parameters.VALIDATION_SUCCEEDED,false);
+			}			
+		}
+		
 		return result;
 	}
 
