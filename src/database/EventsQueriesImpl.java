@@ -290,7 +290,6 @@ public class EventsQueriesImpl implements EventsQueries {
 	public ArrayList<User> getUsers() {
 		ArrayList<User> users = new ArrayList<User>();
 		this.users.clear();
-		Connection conn = connector.getConnection();
 		try {
 			ResultSet rs = connector.customQuery("select * from User");
 			while (rs.next()) {
@@ -313,7 +312,6 @@ public class EventsQueriesImpl implements EventsQueries {
 		getUsers();
 		this.categories.clear();
 		
-		Connection conn = connector.getConnection();
 		try {
 			ResultSet rs = connector.customQuery("select * from Category");
 			while (rs.next()) {
@@ -336,7 +334,6 @@ public class EventsQueriesImpl implements EventsQueries {
 		//temporary solution to outdated user-hashmap, in case creator only exists in db
 		getCategories();
 		
-		Connection conn = connector.getConnection();
 		try {
 			ResultSet rs = connector.customQuery("select * from Category");
 			while (rs.next()) {
@@ -393,7 +390,6 @@ public class EventsQueriesImpl implements EventsQueries {
 		String username = user.getUsername();
 		ArrayList<User> friends = new ArrayList<User>();
 		
-		Connection conn = connector.getConnection();
 		try {
 			ResultSet rs = connector.customQuery("select * from Friends where (user1 = '"+username+"') or (user2 = '"+username+"');");
 			while (rs.next()) {
@@ -415,7 +411,6 @@ public class EventsQueriesImpl implements EventsQueries {
 		String username = user.getUsername();
 		ArrayList<Category> followed = new ArrayList<Category>();
 		
-		Connection conn = connector.getConnection();
 		try {
 			ResultSet rs = connector.customQuery("select category_id from Follows where (username = '"+username+"');");
 			while (rs.next()) {
