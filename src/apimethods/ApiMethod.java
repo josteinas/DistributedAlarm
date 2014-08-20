@@ -24,14 +24,14 @@ public abstract class ApiMethod {
 		return resultSet;
 	}
 	
-	public static ApiMethod instanceFactory(String methodName){
+	public static ApiMethod instanceFactory(String methodName) throws APIException{
 		if(methodName.equalsIgnoreCase(CreateUser.class.getSimpleName()))
 			return CreateUser.getInstance();
 		if(methodName.equalsIgnoreCase(RestorePassword.class.getSimpleName()))
 			return RestorePassword.getInstance();
 		if(methodName.equalsIgnoreCase(ValidateUser.class.getSimpleName()))
 			return ValidateUser.getInstance();
-		return null;
+		throw new APIException(String.format("No such method %s", methodName));
 	}
 	
 	
