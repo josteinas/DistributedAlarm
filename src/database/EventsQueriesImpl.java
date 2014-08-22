@@ -430,6 +430,7 @@ public class EventsQueriesImpl implements EventsQueries {
 	@Override
 	public User getUser(String username) {
 		//TODO query one specific user instead of all??
+		users.clear();
 		getUsers();
 		return users.get(username);
 	}

@@ -35,7 +35,7 @@ public class CreateUser extends ApiMethod{
 		}
 		else if(EventsQueriesImpl.getInstance().addUser(user)){
 			result.put(ApiConstants.Parameters.USERNAME, userName);
-			result.put(ApiConstants.Parameters.REGISTRATION_SUCCEEDED, false);
+			result.put(ApiConstants.Parameters.REGISTRATION_SUCCEEDED, true);
 		}else{
 			throw new APIException("Unable to create user",  String.format("Unable to create user %s", user.toString()));
 		}
