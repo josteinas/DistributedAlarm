@@ -11,5 +11,6 @@ public class ApiConstants {
 		public static final String EMAIL = "email";
 		
 		public static final String VALIDATION_SUCCEEDED = "validation_succeeded";
+		public static final String REGISTRATION_SUCCEEDED = "registration_succeeded";
 	}
 }

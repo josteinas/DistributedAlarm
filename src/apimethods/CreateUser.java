@@ -30,9 +30,12 @@ public class CreateUser extends ApiMethod{
 		
 		password = new StrongPasswordDigester().digestPassword(password);
 		User user = new User(userName, password, imgUrl, email);
-		
-		if(EventsQueriesImpl.getInstance().addUser(user)){
+		if(EventsQueriesImpl.getInstance().getUser(userName) != null) {
+			result.put(ApiConstants.Parameters.REGISTRATION_SUCCEEDED, false);
+		}
+		else if(EventsQueriesImpl.getInstance().addUser(user)){
 			result.put(ApiConstants.Parameters.USERNAME, userName);
+			result.put(ApiConstants.Parameters.REGISTRATION_SUCCEEDED, false);
 		}else{
 			throw new APIException("Unable to create user",  String.format("Unable to create user %s", user.toString()));
 		}
