@@ -411,10 +411,13 @@ public class EventsQueriesImpl implements EventsQueries {
 		String username = user.getUsername();
 		ArrayList<Category> followed = new ArrayList<Category>();
 		
+		getCategories();
 		try {
 			ResultSet rs = connector.customQuery("select category_id from Follows where (username = '"+username+"');");
 			while (rs.next()) {
-				followed.add(categories.get(rs.getLong("category_id")));
+				Category cat = categories.get(rs.getLong("category_id"));
+				cat.getCreator().setPassword(null);
+				followed.add(cat);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -31,6 +31,9 @@ public abstract class ApiMethod {
 			return RestorePassword.getInstance();
 		if(methodName.equalsIgnoreCase(ValidateUser.class.getSimpleName()))
 			return ValidateUser.getInstance();
+		if(methodName.equalsIgnoreCase(GetFollowedCategories.class.getSimpleName()))
+			return GetFollowedCategories.getInstance();
+		
 		throw new APIException(String.format("No such method %s", methodName));
 	}
 	
