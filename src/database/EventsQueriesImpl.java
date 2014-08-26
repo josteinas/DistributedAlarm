@@ -111,7 +111,7 @@ public class EventsQueriesImpl implements EventsQueries {
 
 	@Override
 	public boolean addCategory(Category category) {
-		String name = category.getNames();
+		String name = category.getName();
 		float longitude = category.getLongitude();
 		float latitude = category.getLatitude();
 		String creator = category.getCreator().getUsername();
@@ -253,7 +253,7 @@ public class EventsQueriesImpl implements EventsQueries {
 		Connection conn = connector.getConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE Category SET name=(?), lat =(?), lon =(?), private =(?) WHERE category_id =(?) ;");
-			pstmt.setString(1, category.getNames());
+			pstmt.setString(1, category.getName());
 			pstmt.setFloat(2, category.getLatitude());
 			pstmt.setFloat(3, category.getLongitude());
 			pstmt.setBoolean(4, category.isPrivate());
