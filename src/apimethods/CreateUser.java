@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import apimethods.exceptions.APIException;
 import database.EventsQueriesImpl;
 import security.StrongPasswordDigester;
-import server.User;
+import server.data.User;
 
 
 public class CreateUser extends ApiMethod{

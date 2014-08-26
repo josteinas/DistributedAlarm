@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
-import server.Category;
-import server.Happening;
-import server.User;
+import server.data.Category;
+import server.data.Happening;
+import server.data.User;
 
 public class EventsQueriesImpl implements EventsQueries {
 	
@@ -111,7 +111,7 @@ public class EventsQueriesImpl implements EventsQueries {
 
 	@Override
 	public boolean addCategory(Category category) {
-		String name = category.getName();
+		String name = category.getNames();
 		float longitude = category.getLongitude();
 		float latitude = category.getLatitude();
 		String creator = category.getCreator().getUsername();
@@ -253,7 +253,7 @@ public class EventsQueriesImpl implements EventsQueries {
 		Connection conn = connector.getConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE Category SET name=(?), lat =(?), lon =(?), private =(?) WHERE category_id =(?) ;");
-			pstmt.setString(1, category.getName());
+			pstmt.setString(1, category.getNames());
 			pstmt.setFloat(2, category.getLatitude());
 			pstmt.setFloat(3, category.getLongitude());
 			pstmt.setBoolean(4, category.isPrivate());

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import apimethods.exceptions.APIException;
 import security.SessionManager;
 import security.StrongPasswordDigester;
-import server.User;
+import server.data.User;
 import database.EventsQueriesImpl;
 
 public class ValidateUser extends ApiMethod {

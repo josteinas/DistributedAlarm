@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import apimethods.exceptions.APIException;
 import security.StrongPasswordDigester;
-import server.User;
+import server.data.User;
 import util.DAUtils;
 import database.EventsQueries;
 import database.EventsQueriesImpl;

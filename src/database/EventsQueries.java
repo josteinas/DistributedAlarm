@@ -2,9 +2,9 @@ package database;
 
 import java.util.ArrayList;
 
-import server.Category;
-import server.Happening;
-import server.User;
+import server.data.Category;
+import server.data.Happening;
+import server.data.User;
 
 public interface EventsQueries {
 	

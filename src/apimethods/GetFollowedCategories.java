@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 
-import server.Category;
-import server.User;
+import server.data.Category;
+import server.data.User;
 import apimethods.exceptions.APIException;
 import database.EventsQueriesImpl;
 
